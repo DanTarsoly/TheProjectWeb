@@ -1,0 +1,24 @@
+{
+  "name": "theprojectweb",
+  "version": "1.0.0",
+  "description": "TheProject Web Application",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "roninn-creations",
+  "license": "MIT",
+  "dependencies": {
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "^9.1.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.5",
+    "@types/react": "^16.9.11",
+    "typescript": "^3.6.4"
+  }
+}
