@@ -1,3 +1,5 @@
+# TheProjectWeb
+
 Web application for TheProject application.
 
 A web application written in typescript and Next.js that communicates with TheProjectAPI through HTTPS.
