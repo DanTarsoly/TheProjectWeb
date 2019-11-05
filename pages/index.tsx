@@ -8,12 +8,37 @@ const Index = (props: any) => (
     <ul>
       {props.shows.map((show: any) => (
         <li key={show.id}>
-          <Link href="/p/[id]" as={`/p/${show.id}`}>
+          <Link href="/show/[id]" as={`/show/${show.id}`}>
             <a>{show.name}</a>
           </Link>
         </li>
       ))}
     </ul>
+
+    <style jsx>{`
+        h1,
+        a {
+          font-family: 'Arial';
+        }
+
+        ul {
+          padding: 0;
+        }
+
+        li {
+          list-style: none;
+          margin: 5px 0;
+        }
+
+        a {
+          text-decoration: none;
+          color: blue;
+        }
+
+        a:hover {
+          opacity: 0.6;
+        }
+      `}</style>
   </Layout>
 );
 
