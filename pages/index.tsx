@@ -1,15 +1,16 @@
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import fetch from 'isomorphic-unfetch';
+import * as placesApi from '../api/places';
 
 const Index = (props: any) => (
   <Layout>
-    <h1>Batman TV Shows</h1>
+    <h1>TheProject Web App</h1>
+    <h2>Places</h2>
     <ul>
-      {props.shows.map((show: any) => (
-        <li key={show.id}>
-          <Link href="/show/[id]" as={`/show/${show.id}`}>
-            <a>{show.name}</a>
+      {props.places.map((place: any) => (
+        <li key={place.id}>
+          <Link href="/place/[id]" as={`/place/${place.id}`}>
+            <a>{place.name}</a>
           </Link>
         </li>
       ))}
@@ -17,12 +18,14 @@ const Index = (props: any) => (
 
     <style jsx>{`
         h1,
+        h2,
         a {
           font-family: 'Arial';
         }
 
         ul {
           padding: 0;
+          margin-left: 5px;
         }
 
         li {
@@ -43,14 +46,15 @@ const Index = (props: any) => (
 );
 
 Index.getInitialProps = async function() {
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-  const data = await res.json();
+  const res = await fetch('http://localhost:8080/places');
+  if (!res.ok) {
+    console.error(res);
+    return {};
+  } 
+  const places = await res.json();
+  console.log(`Places data fetched. Count: ${places.length}`);
 
-  console.log(`Show data fetched. Count: ${data.length}`);
-
-  return {
-    shows: data.map((entry: any) => entry.show)
-  };
+  return { places };
 };
 
 export default Index;
