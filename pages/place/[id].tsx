@@ -1,5 +1,5 @@
 import Layout from '../../components/Layout';
-import PlaceComp from '../../components/Place'
+import PlaceComp from '../../components/Place';
 import * as placesApi from '../../api/places';
 import * as reviewsApi from '../../api/reviews';
 import {Place, Review} from '../../utils/models';
@@ -7,29 +7,8 @@ import {Place, Review} from '../../utils/models';
 const PlacePage = (props: {place: Place, reviews: Review[]}) => (
   <Layout>
     <PlaceComp place={props.place} reviews={props.reviews}/>
-    <style jsx global>{`
-      h1,
-      h2,
-      h3,
-      p,
-      li {
-        font-family: 'Arial';
-      }
-
-      ul {
-        padding-left: 5px;
-      }
-
-      li {
-        list-style: none;
-        margin: 5px;
-      }
-
-      a {
-        text-decoration: none;
-        color: blue;
-      }
-    `}</style>
+    <style jsx>{`
+      `}</style>
   </Layout>
 );
 

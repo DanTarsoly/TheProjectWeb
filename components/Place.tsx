@@ -1,9 +1,15 @@
 import ReviewComp from './Review';
 import {Place, Review} from '../utils/models';
 
+const style = {
+  // margin: 5,
+  // padding: 5,
+  // border: '1px solid #DDD'
+};
+
 const PlaceComp = (props: PropTypes) => {
   return (
-    <div className="place">
+    <div className="place" style={style}>
       <h1>{props.place.name}</h1>
       <p>{props.place.address.street}</p>
       <p>{props.place.address.post}</p>

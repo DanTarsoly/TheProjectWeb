@@ -1,9 +1,18 @@
-import React from 'react'
+import Link from 'next/link';
+import {Place} from '../utils/models';
 
-export default function PlaceListItem() {
+const PlaceListItem = (props: PropTypes) => {
   return (
-    <div>
-      
-    </div>
+    <li className="place-list-item">
+      <Link href="/place/[id]" as={`/place/${props.place.id}`}>
+        <a>{props.place.name}</a>
+      </Link>
+    </li>
   )
 }
+
+type PropTypes = {
+  place: Place
+}
+
+export default PlaceListItem;

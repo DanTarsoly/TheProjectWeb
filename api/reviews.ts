@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-unfetch';
 import {Review} from '../utils/models';
 
-const REVIEWS_URL = 'http://localhost:8080/reviews';
+const REVIEWS_URL = 'https://the-project-api.herokuapp.com/reviews';
 
 export async function read(id: string): Promise<Review> {
   const res = await fetch(`${REVIEWS_URL}/${id}`);
