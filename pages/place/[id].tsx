@@ -1,47 +1,52 @@
-import Markdown from 'react-markdown';
 import Layout from '../../components/Layout';
+import PlaceComp from '../../components/Place'
 import * as placesApi from '../../api/places';
+import * as reviewsApi from '../../api/reviews';
+import {Place, Review} from '../../utils/models';
 
-const Place = (props: any) => (
+const PlacePage = (props: {place: Place, reviews: Review[]}) => (
   <Layout>
-    <h1>{props.place.name}</h1>
-    <p>{props.place.id}</p>
+    <PlaceComp place={props.place} reviews={props.reviews}/>
     <style jsx global>{`
       h1,
       h2,
-      p {
+      h3,
+      p,
+      li {
         font-family: 'Arial';
       }
-      
+
+      ul {
+        padding-left: 5px;
+      }
+
+      li {
+        list-style: none;
+        margin: 5px;
+      }
+
       a {
         text-decoration: none;
         color: blue;
-      }
-
-      .markdown a:hover {
-        opacity: 0.6;
-      }
-
-      .markdown h3 {
-        margin: 0;
-        padding: 0;
-        text-transform: uppercase;
       }
     `}</style>
   </Layout>
 );
 
-Place.getInitialProps = async function(context: any) {
+PlacePage.getInitialProps = async function(context: any) {
   const { id } = context.query;
-  const res = await fetch(`http://localhost:8080/places/${id}`);
-  if (!res.ok) {
-    console.error(res);
-    return {};
+  try {
+    const place = await placesApi.read(id);
+    const reviews = await reviewsApi.readMany(id);
+    return { 
+      place: place,
+      reviews: reviews
+    };
   }
-  const place = await res.json();
-  console.log(`Place data fetched.`);
-
-  return { place };
+  catch (error) {
+    console.error(error);
+    return { error };
+  }
 };
 
-export default Place;
+export default PlacePage;
