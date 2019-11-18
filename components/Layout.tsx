@@ -1,11 +1,5 @@
 import Header from './Header';
 
-const layoutStyle = {
-  margin: 20,
-  padding: 20,
-  border: '1px solid #DDD'
-};
-
 const Layout = (props: any) => (
   <div style={layoutStyle}>
     <Header />
@@ -30,8 +24,9 @@ const Layout = (props: any) => (
         }
       }
 
-      ul {
-        padding-left: 10px;
+      main,
+      div {
+        border-radius: 3px;
       }
 
       li {
@@ -42,13 +37,36 @@ const Layout = (props: any) => (
         text-decoration: none;
         color: white;
       }
-
       a:hover {
+        opacity: 0.6;
+      }
+
+      input {
+        background: #eee;
+        border: none;
+        border-radius: 3px;
+        padding: 5px;
+      }
+
+      button {
+        background: #fff;
+        color: #333;
+        font-weight: bold;
+        border: none;
+        border-radius: 3px;
+        padding: 5px;
+      }
+      button:hover {
         opacity: 0.6;
       }
     `}</style>
   </div>
-  
 );
+
+const layoutStyle = {
+  margin: 20,
+  padding: 20,
+  border: '1px solid #DDD'
+};
 
 export default Layout;

@@ -1,10 +1,14 @@
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import PlaceList from '../components/PlaceList'
+import PlaceList from '../components/places/PlaceList'
 import * as placesApi from '../api/places';
 import {Place} from '../utils/models';
 
-const Index = (props: {places: Place[]}) => (
+type Props = {
+  places: Place[]
+}
+
+const Index = (props: Props) => (
   <Layout>
     <h1>TheProject Web App</h1>
     <h2>Places</h2>

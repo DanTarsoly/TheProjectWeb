@@ -1,18 +1,18 @@
-import {Place} from '../utils/models';
+import {Place} from '../../utils/models';
 import PlaceListItem from './PlaceListItem';
 
-const PlaceList = (props: PropTypes) => {
+type Props = {
+  places: Place[]
+}
+
+const PlaceList: React.FC<Props> = ({places}) => {
   return (
     <ul className="place-list">
-      {props.places.map((place: Place) => (
+      {places.map((place: Place) => (
         <PlaceListItem key={place.id} place={place}/>
       ))}
     </ul>
   )
-}
-
-type PropTypes = {
-  places: Place[]
 }
 
 export default PlaceList;

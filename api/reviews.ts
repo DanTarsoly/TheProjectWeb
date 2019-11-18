@@ -1,12 +1,16 @@
 import fetch from 'isomorphic-unfetch';
 import {Review} from '../utils/models';
 
-const REVIEWS_URL = 'https://the-project-api.herokuapp.com/reviews';
+// const PLACES_URL = 'https://the-project-api.herokuapp.com/reviews';
+const REVIEWS_URL = 'http://localhost:8080/reviews';
 
 export async function read(id: string): Promise<Review> {
   const res = await fetch(`${REVIEWS_URL}/${id}`);
-  if (!res.ok) throw res;
   const json = await res.json();
+  if (!res.ok) {
+    console.warn(`Fetching review failed. Message: ${json.message}`);
+    throw {status: res.status, message: json.message};
+  }
   console.log(`Review fetched. ID: ${json.id}`);
   return json;
 }
@@ -23,8 +27,11 @@ export async function readMany(place?: string, user?: string): Promise<Review[]>
     url = REVIEWS_URL;
   }
   const res = await fetch(url);
-  if (!res.ok) throw res;
   const json = await res.json();
-  console.log(`Places fetched. Count: ${json.length}`);
+  if (!res.ok) {
+    console.warn(`Fetching reviews failed. Message: ${json.message}`);
+    throw {status: res.status, message: json.message};
+  }
+  console.log(`Reviews fetched. Count: ${json.length}`);
   return json;
 }

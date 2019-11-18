@@ -1,10 +1,16 @@
 import Layout from '../../components/Layout';
-import PlaceComp from '../../components/Place';
+import PlaceComp from '../../components/places/Place';
 import * as placesApi from '../../api/places';
 import * as reviewsApi from '../../api/reviews';
 import {Place, Review} from '../../utils/models';
+import { NextPageContext } from 'next';
 
-const PlacePage = (props: {place: Place, reviews: Review[]}) => (
+type Props = {
+  place: Place,
+  reviews: Review[]
+}
+
+const PlacePage = (props: Props) => (
   <Layout>
     <PlaceComp place={props.place} reviews={props.reviews}/>
     <style jsx>{`
