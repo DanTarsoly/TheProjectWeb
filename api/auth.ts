@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-unfetch';
-import {Method, ErrorResult, basicRequest} from './request'; 
+import {Method, basicRequest} from './request'; 
 import {AuthData} from '../utils/models';
 
 // const AUTH_URL = 'https://the-project-api.herokuapp.com/auth';

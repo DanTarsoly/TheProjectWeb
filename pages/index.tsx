@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import Layout from '../components/Layout';
 import PlaceList from '../components/places/PlaceList'
 import * as placesApi from '../api/places';
 import {Place} from '../utils/models';
 
 type Props = {
+  token: string,
   places: Place[]
 }
 
@@ -13,9 +13,6 @@ const Index = (props: Props) => (
     <h1>TheProject Web App</h1>
     <h2>Places</h2>
     <PlaceList places={props.places}/>
-
-    <style jsx>{`
-      `}</style>
   </Layout>
 );
 

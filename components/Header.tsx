@@ -1,6 +1,26 @@
 import Link from 'next/link';
 
-const Header = () => (
+const handleLogout = () => {
+  localStorage.removeItem('jwt');
+}
+
+const LoginLink = () => (
+  <Link href="/account/login">
+    <a style={linkStyle}>Log in</a>
+  </Link>
+)
+
+const LogoutLink = () => (
+  <Link href="/">
+    <a onClick={handleLogout} style={linkStyle}>Log out</a>
+  </Link>
+)
+
+type Props = {
+  token?: string
+}
+
+const Header: React.FC<Props> = ({token}) => (
   <header>
     <nav>
       <ul style={listStyle}>
@@ -10,9 +30,7 @@ const Header = () => (
           </Link>
         </li>
         <li style={listItemStyle}>
-          <Link href="/account/login">
-            <a style={linkStyle}>Log in</a>
-          </Link>
+          {token ? (<LogoutLink/>) : (<LoginLink/>)}
         </li>
         <li style={listItemStyle}>
           <Link href="/account/register">
