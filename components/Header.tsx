@@ -21,8 +21,8 @@ type Props = {
 }
 
 const Header: React.FC<Props> = ({token}) => (
-  <header>
-    <nav>
+  <header style={headerStyle}>
+    <nav style={navStyle}>
       <ul style={listStyle}>
         <li style={firstListItemStyle}>
           <Link href="/">
@@ -32,15 +32,25 @@ const Header: React.FC<Props> = ({token}) => (
         <li style={listItemStyle}>
           {token ? (<LogoutLink/>) : (<LoginLink/>)}
         </li>
-        <li style={listItemStyle}>
-          <Link href="/account/register">
-            <a style={linkStyle}>Sign up</a>
-          </Link>
-        </li>
+        {!token && (
+          <li style={listItemStyle}>
+            <Link href="/account/register">
+              <a style={linkStyle}>Sign up</a>
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   </header>
 );
+
+const headerStyle = {
+  borderBottom: '1px solid #DDD'
+}
+
+const navStyle = {
+  margin: 20
+}
 
 const listStyle = {
   display: 'flex',

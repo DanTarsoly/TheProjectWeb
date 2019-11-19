@@ -1,9 +1,8 @@
-import Layout from '../../components/Layout';
-import PlaceComp from '../../components/places/Place';
+import {Place, Review} from '../../utils/models';
 import * as placesApi from '../../api/places';
 import * as reviewsApi from '../../api/reviews';
-import {Place, Review} from '../../utils/models';
-import { NextPageContext } from 'next';
+import Layout from '../../components/Layout';
+import PlaceComp from '../../components/places/Place';
 
 type Props = {
   place: Place,
@@ -13,8 +12,6 @@ type Props = {
 const PlacePage = (props: Props) => (
   <Layout>
     <PlaceComp place={props.place} reviews={props.reviews}/>
-    <style jsx>{`
-      `}</style>
   </Layout>
 );
 

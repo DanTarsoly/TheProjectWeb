@@ -1,5 +1,6 @@
-import Header from './Header';
 import { ReactNode, useState, useEffect} from 'react';
+import Header from './Header';
+import Main from './Main';
 
 type Props = {
   children?: ReactNode
@@ -13,9 +14,11 @@ const Layout: React.FC = ({children}) => {
   });
   
   return (
-    <div style={layoutStyle}>
+    <div className='layout'>
       <Header token={token}/>
-      {children}
+      <Main>
+        {children}  
+      </Main>
 
       <style jsx global>{`
         * {
@@ -34,11 +37,6 @@ const Layout: React.FC = ({children}) => {
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
           }
-        }
-
-        main,
-        div {
-          border-radius: 3px;
         }
 
         li {
@@ -75,11 +73,5 @@ const Layout: React.FC = ({children}) => {
     </div>
   );
 }
-
-const layoutStyle = {
-  margin: 20,
-  padding: 20,
-  border: '1px solid #DDD'
-};
 
 export default Layout;

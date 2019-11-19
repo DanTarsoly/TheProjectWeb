@@ -1,12 +1,13 @@
 import { FormEvent, ChangeEvent, useState} from 'react';
 import Router from 'next/router'
 import * as authApi from '../../api/auth';
+import ErrorBox from '../ErrorBox';
 
 
 const LoginComp: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [error, setError] = useState();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     authApi.basic(email, password)
@@ -27,36 +28,35 @@ const LoginComp: React.FC = () => {
   }
 
   return (
-    <form className='login-form' onSubmit={handleSubmit} style={formStyle}>
-      {error && <div style={errorStyle}>{error}</div>}
-      <button type='button' style={buttonStyle}>Facebook</button>
-      <button type='button' style={buttonStyle}>Google</button>
-      <div>
-        <input 
-            name='email' 
-            placeholder='email'
-            onChange={updateEmail}
-            style={inputStyle}/>
-        <input 
-            type='password' 
-            name='password' 
-            placeholder='password'
-            onChange={updatePassword}
-            style={inputStyle}/>
-      </div>
+    <form className="login-form"
+        onSubmit={handleSubmit}
+        style={loginStyle}>
+      <h1>Log in</h1>
+      {error && <ErrorBox>{error}</ErrorBox>}
+      <button type="button" style={buttonStyle}>Facebook</button>
+      <button type="button" style={buttonStyle}>Google</button>
+      <input 
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={updateEmail}
+          style={inputStyle}/>
+      <input 
+          type="password" 
+          name="password"
+          placeholder="Password"
+          onChange={updatePassword}
+          style={inputStyle}/>
       <button style={buttonStyle}>Log in</button>
     </form>
   )
 }
 
-const formStyle = {
-}
-
-const errorStyle = {
-  color: '#333',
-  background: 'lightsalmon',
-  marginTop: '5px',
-  padding: '2px 5px 2px 5px'
+const loginStyle = {
+  padding: 20,
+  margin: 20,
+  border: '1px solid #DDD',
+  borderRadius: 4
 }
 
 const buttonStyle = {

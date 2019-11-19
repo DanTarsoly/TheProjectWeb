@@ -1,7 +1,8 @@
-import Layout from '../components/Layout';
-import PlaceList from '../components/places/PlaceList'
-import * as placesApi from '../api/places';
 import {Place} from '../utils/models';
+import * as placesApi from '../api/places';
+import Layout from '../components/Layout';
+import PlaceList from '../components/places/PlaceList';
+import NewPlace from '../components/places/NewPlace';
 
 type Props = {
   token: string,
@@ -10,9 +11,8 @@ type Props = {
 
 const Index = (props: Props) => (
   <Layout>
-    <h1>TheProject Web App</h1>
-    <h2>Places</h2>
     <PlaceList places={props.places}/>
+    <NewPlace/>
   </Layout>
 );
 

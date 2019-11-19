@@ -1,6 +1,14 @@
 export type User = {
   id: string,
-  name: string
+  name: string,
+  picture?: string
+}
+
+export type NewUser = {
+  email: string,
+  name: string,
+  password: string,
+  picture?: string
 }
 
 export type Place = {
@@ -8,6 +16,12 @@ export type Place = {
   name: string;
   address: Address
   tags: string[]
+}
+
+export type NewPlace = {
+  name: string;
+  address: Address
+  tags?: string[]
 }
 
 export type Address = {
@@ -21,8 +35,15 @@ export type Review = {
   user: User,
   place: string,
   rating: number,
-  comment: string,
+  comment?: string,
   createdAt: Date
+}
+
+export type NewReview = {
+  user: string,
+  place: string,
+  rating: number,
+  comment?: string
 }
 
 export type AuthData = {

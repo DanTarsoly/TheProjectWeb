@@ -1,6 +1,3 @@
-import fetch from 'isomorphic-unfetch';
-import { RequestOptions } from 'http';
-
 export enum Method{
   GET = 'GET',
   POST = 'POST',
@@ -8,9 +5,15 @@ export enum Method{
   DELETE = 'DELETE'
 }
 
-export type ErrorResult = {
-  status: number,
-  message: string
+export enum HeaderKey{
+  ContentType = 'Content-Type',
+  Authorization = 'Authorization',
+}
+
+export enum HeaderValue{
+  Json = 'application/json;charset=utf-8',
+  Basic = 'Basic ',
+  Bearer = 'Bearer '
 }
 
 export type Credentials = {
@@ -18,22 +21,57 @@ export type Credentials = {
   password: string
 }
 
+export const request = (
+  method: Method = Method.GET, 
+  body:any = undefined): RequestInit => {
+
+const headers = new Headers();
+const request: RequestInit = {
+  method: method,
+  headers: headers
+};
+if (body) {
+  headers.set(HeaderKey.ContentType, HeaderValue.Json);
+  request.body= JSON.stringify(body);
+}
+return request;
+}
+
 export const basicRequest = (
+    username: string,
+    password: string,
     method: Method = Method.GET, 
-    body:any = null,
-    credentials: Credentials|null = null): RequestInit => {
+    body:any = undefined): RequestInit => {
   
   const headers = new Headers();
+  headers.set(HeaderKey.Authorization,
+      HeaderValue.Basic + btoa(username + ":" + password));
   const request: RequestInit = {
     method: method,
     headers: headers
   };
   if (body) {
-    headers.set('Content-Type', 'application/json;charset=utf-8');
+    headers.set(HeaderKey.ContentType, HeaderValue.Json);
     request.body= JSON.stringify(body);
   }
-  if (credentials) {
-    headers.set('Authorization', 'Basic ' + btoa(credentials.username + ":" + credentials.password));
-  }
   return request;
+}
+
+export const bearerRequest = (
+  token: string,
+  method: Method = Method.GET, 
+  body:any = undefined): RequestInit => {
+
+const headers = new Headers();
+headers.set(HeaderKey.Authorization,
+  HeaderValue.Bearer + token);
+const request: RequestInit = {
+  method: method,
+  headers: headers
+};
+if (body) {
+  headers.set(HeaderKey.ContentType, HeaderValue.Json);
+  request.body= JSON.stringify(body);
+}
+return request;
 }

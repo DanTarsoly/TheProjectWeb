@@ -1,5 +1,6 @@
-import ReviewComp from '../reviews/Review';
 import {Place, Review} from '../../utils/models';
+import ReviewComp from '../reviews/Review';
+import NewReviewComp from '../reviews/NewReview'
 
 type Props = {
   place: Place,
@@ -8,7 +9,7 @@ type Props = {
 
 const PlaceComp: React.FC<Props> = ({place, reviews}) => {
   return (
-    <div className="place">
+    <div className="place" style={placeStyle}>
       <h1>{place.name}</h1>
       <p>{place.address.street}</p>
       <p>{place.address.post}</p>
@@ -24,8 +25,16 @@ const PlaceComp: React.FC<Props> = ({place, reviews}) => {
       {reviews.map((review: Review) => (
         <ReviewComp key={review.id} review={review}/>
       ))}
+      <NewReviewComp place={place.id}/>
     </div>
   )
+}
+
+const placeStyle = {
+  padding: 20,
+  margin: 20,
+  border: '1px solid #DDD',
+  borderRadius: 4
 }
 
 export default PlaceComp;
