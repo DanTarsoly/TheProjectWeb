@@ -1,4 +1,7 @@
 import { FormEvent, ChangeEvent, useState} from 'react';
+import Router from 'next/router';
+import * as reviewsApi from '../../api/reviews';
+import { NewReview } from '../../utils/models';
 import ErrorBox from '../ErrorBox';
 
 type Props = {
@@ -6,22 +9,31 @@ type Props = {
 }
 
 const NewRevirew: React.FC<Props> = ({place}) => {
-  const [rating, setRating] = useState();
-  const [comment, setComment] = useState();
-  const [error, setError] = useState();
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    // authApi.basic(email, password)
-    //   .then(authData => {
-    //     localStorage.setItem('jwt', authData.token);
-    //     Router.replace('/');
-    //   })
-    //   .catch(err => setError(err.message));
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      const newReview: NewReview = {
+        place: place,
+        rating: rating,
+        comment: comment
+      }
+      reviewsApi.create(newReview, token)
+      .then(place => {
+        Router.replace(`/place/${place.id}`);
+      })
+      .catch(err => setError(err.message));
+    } else {
+      setError('Log in to add a review!');
+    }
     event.preventDefault();
   }
 
   const updateRating = (event: ChangeEvent<HTMLInputElement>) => {
-    setRating(event.target.value);
+    setRating(Number(event.target.value));
   }
 
   const updateComment = (event: ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +47,7 @@ const NewRevirew: React.FC<Props> = ({place}) => {
     <h2>Add Review</h2>
     {error && <ErrorBox>{error}</ErrorBox>}
     <input 
+        type="number"
         name="rating"
         placeholder="Rating"
         onChange={updateRating}

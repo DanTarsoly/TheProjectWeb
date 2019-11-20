@@ -13,7 +13,7 @@ export async function create(place: NewPlace, token:string): Promise<Place> {
     console.warn(`Adding place failed. Message: ${json.message}`);
     throw {status: res.status, message: json.message};
   }
-  console.log(`Place added. ID: ${json.user.id}`);
+  console.log(`Place added. ID: ${json.id}`);
   return json;
 }
 

@@ -1,18 +1,24 @@
 import { FormEvent, ChangeEvent, useState} from 'react';
 import Router from 'next/router'
 import * as authApi from '../../api/auth';
+import { NewUser, AuthData} from '../../utils/models';
 import ErrorBox from '../ErrorBox';
 
 
 const RegisterComp: React.FC = () => {
-  const [email, setEmail] = useState();
-  const [name, setName] = useState()
-  const [password, setPassword] = useState();
-  const [password2, setPassword2] = useState()
-  const [error, setError] = useState();
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('')
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('')
+  const [error, setError] = useState('');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    authApi.basic(email, password)
+    const newUser: NewUser = {
+      email: email,
+      name: name,
+      password: password
+    }
+    authApi.register(newUser)
       .then(authData => {
         localStorage.setItem('jwt', authData.token);
         Router.replace('/');

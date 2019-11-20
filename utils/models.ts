@@ -40,7 +40,6 @@ export type Review = {
 }
 
 export type NewReview = {
-  user: string,
   place: string,
   rating: number,
   comment?: string

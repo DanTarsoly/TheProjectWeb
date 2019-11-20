@@ -13,7 +13,7 @@ export async function create(place: NewReview, token:string): Promise<Review> {
     console.warn(`Adding review failed. Message: ${json.message}`);
     throw {status: res.status, message: json.message};
   }
-  console.log(`Review added. ID: ${json.user.id}`);
+  console.log(`Review added. ID: ${json.id}`);
   return json;
 }
 

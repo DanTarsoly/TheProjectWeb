@@ -5,9 +5,9 @@ import ErrorBox from '../ErrorBox';
 
 
 const LoginComp: React.FC = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [error, setError] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     authApi.basic(email, password)

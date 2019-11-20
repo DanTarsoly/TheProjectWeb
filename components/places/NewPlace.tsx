@@ -1,18 +1,18 @@
 import { FormEvent, ChangeEvent, useState} from 'react';
-import Router from 'next/router'
+import Router from 'next/router';
 import * as placesApi from '../../api/places';
-import ErrorBox from '../ErrorBox';
 import { NewPlace } from '../../utils/models';
+import ErrorBox from '../ErrorBox';
 
 type Props = {
 }
 
 const NewPlaceComp: React.FC<Props> = ({}) => {
-  const [name, setName] = useState();
-  const [street, setStreet] = useState();
-  const [post, setPost] = useState();
-  const [city, setCity] = useState();
-  const [error, setError] = useState();
+  const [name, setName] = useState('');
+  const [street, setStreet] = useState('');
+  const [post, setPost] = useState('');
+  const [city, setCity] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     const token = localStorage.getItem('jwt');
@@ -30,8 +30,9 @@ const NewPlaceComp: React.FC<Props> = ({}) => {
         Router.replace(`/place/${place.id}`);
       })
       .catch(err => setError(err.message));
+    } else {
+      setError('Log in to add a place!');
     }
-    setError('Log in to add a place!');
     event.preventDefault();
   }
 
