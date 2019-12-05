@@ -2,11 +2,11 @@ import fetch from 'isomorphic-unfetch';
 import {Method, bearerRequest} from '../api/request';
 import {Review, NewReview} from '../utils/models';
 
-// const PLACES_URL = 'https://the-project-api.herokuapp.com/reviews';
-const REVIEWS_URL = 'http://localhost:8080/reviews';
+const REVIEWS_URL = 'https://the-project-api.herokuapp.com/reviews';
+// const REVIEWS_URL = 'http://localhost:8080/reviews';
 
-export async function create(place: NewReview, token:string): Promise<Review> {
-  const req = bearerRequest(token, Method.POST, place);
+export async function create(review: NewReview, token:string): Promise<Review> {
+  const req = bearerRequest(token, Method.POST, review);
   const res = await fetch(REVIEWS_URL, req);
   const json = await res.json();
   if (!res.ok) {

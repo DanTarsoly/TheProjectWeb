@@ -5,10 +5,10 @@ import { NewReview } from '../../utils/models';
 import ErrorBox from '../ErrorBox';
 
 type Props = {
-  place: string
+  placeId: string
 }
 
-const NewRevirew: React.FC<Props> = ({place}) => {
+const NewRevirew: React.FC<Props> = ({placeId}) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [error, setError] = useState('');
@@ -17,13 +17,13 @@ const NewRevirew: React.FC<Props> = ({place}) => {
     const token = localStorage.getItem('jwt');
     if (token) {
       const newReview: NewReview = {
-        place: place,
+        place: placeId,
         rating: rating,
         comment: comment
       }
       reviewsApi.create(newReview, token)
-      .then(place => {
-        Router.replace(`/place/${place.id}`);
+      .then(review => {
+        Router.replace(`/place/${placeId}`);
       })
       .catch(err => setError(err.message));
     } else {

@@ -2,12 +2,12 @@ import fetch from 'isomorphic-unfetch';
 import {AuthData, NewUser} from '../utils/models';
 import {Method, request, basicRequest} from './request'; 
 
-// const AUTH_URL = 'https://the-project-api.herokuapp.com/auth';
-const Auth_URL = 'http://localhost:8080/auth';
+const AUTH_URL = 'https://the-project-api.herokuapp.com/auth';
+// const AUTH_URL = 'http://localhost:8080/auth';
 
 export async function basic(username: string, password:string): Promise<AuthData> {
   const req = basicRequest(username, password);
-  const res = await fetch(Auth_URL+'/basic', req);
+  const res = await fetch(AUTH_URL+'/basic', req);
   const json = await res.json();
   if (!res.ok) {
     console.warn(`Authentication failed. Message: ${json.message}`);
@@ -19,7 +19,7 @@ export async function basic(username: string, password:string): Promise<AuthData
 
 export async function register(regData: NewUser): Promise<AuthData> {
   const req = request(Method.POST, regData);
-  const res = await fetch(Auth_URL+'/register', req);
+  const res = await fetch(AUTH_URL+'/register', req);
   const json = await res.json();
   if (!res.ok) {
     console.warn(`Registration failed. Message: ${json.message}`);

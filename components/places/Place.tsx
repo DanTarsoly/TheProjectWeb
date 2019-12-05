@@ -25,7 +25,7 @@ const PlaceComp: React.FC<Props> = ({place, reviews}) => {
       {reviews.map((review: Review) => (
         <ReviewComp key={review.id} review={review}/>
       ))}
-      <NewReviewComp place={place.id}/>
+      <NewReviewComp placeId={place.id}/>
     </div>
   )
 }

@@ -27,7 +27,7 @@ const NewPlaceComp: React.FC<Props> = ({}) => {
       }
       placesApi.create(newPlace, token)
       .then(place => {
-        Router.replace(`/place/${place.id}`);
+        Router.push(`/place/${place.id}`);
       })
       .catch(err => setError(err.message));
     } else {

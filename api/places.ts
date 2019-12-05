@@ -2,8 +2,8 @@ import fetch from 'isomorphic-unfetch';
 import {Place, NewPlace} from '../utils/models';
 import {Method, bearerRequest} from '../api/request';
 
-// const PLACES_URL = 'https://the-project-api.herokuapp.com/places';
-const PLACES_URL = 'http://localhost:8080/places';
+const PLACES_URL = 'https://the-project-api.herokuapp.com/places';
+// const PLACES_URL = 'http://localhost:8080/places';
 
 export async function create(place: NewPlace, token:string): Promise<Place> {
   const req = bearerRequest(token, Method.POST, place);
